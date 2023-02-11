@@ -22,7 +22,6 @@ import java.util.Date;
 public class SlotSchedule {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
          
     ///private Date timeSlot;

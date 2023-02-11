@@ -1,4 +1,4 @@
-# Irrigation System App
+# Automatic Irrigation System
 
 
 As a irrigation system which helps the automatic irrigation of agricultural lands without human intervention, system has to
@@ -9,6 +9,11 @@ the configured time slots/amount of water.
 
 
 ## Instructions
+To compile
+
+```
+mvn clean compile
+```
 
 To compile (also runs unit tests)
 
@@ -40,8 +45,7 @@ To  add land post request to http://localhost:8080/api/v1/land
 {
     "code": "73732823y723899",
     "area": 2000,
-    "landType": "Sandy",
-    "agricType": "Rice farming"
+    "landType": "Sandy"
 }
 ```
 
@@ -51,8 +55,7 @@ To  edit land put request to http://localhost:8080/api/v1/land/{landId}
 {
     "code": "29388933",
     "area": 2000,
-    "landType": "Clay Soil",
-    "agricType": "Rice farming"
+    "landType": "Clay Soil"
 }
 ```
 
@@ -75,7 +78,6 @@ To  get land details navigate to http://localhost:8080/api/v1/land/
         "id": 1,
         "code": "29388933",
         "landType": "Clay Soil",
-        "agricType": "Rice farming",
         "area": 2000.0,
         "landConfigurations": [
             {
@@ -126,22 +128,11 @@ To  get land details navigate to http://localhost:8080/api/v1/land/
         "id": 3,
         "code": "2722782392889",
         "landType": "sandy soil",
-        "agricType": "Rice Farming",
         "area": 23348.0,
         "landConfigurations": []
     }
 ]
-```
-## How it works
-```
-After setting up the land and land configuration a task scheduler is run every seconds to check the 
-land that is due for irrigation base on nextTimeSlot column in the land configuration table if found, the nextTimeSlot field is updated base on the intervalInDays value. 
 
-Then irrigation schedule is created and executed by sending a request to Iot device to perform the irrigation using the IoTDeviceControllerService a mock implementation as been added to the solution to return random status of SUCCESSFUL,FAILED or NOTAVAILABLE.
-
-If the service returns NOTAVAILABLE the service is retried until the allowed number of retries is exceed, if the status is still NOTAVAILABE then an  alert is sent to the admin to notify the admin of the service unavailability.  
-
-```
 
 ## Run all the test.
 $ mvn test

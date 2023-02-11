@@ -16,8 +16,8 @@ public class SlotScheduler  {
     private final PlotConfigurationService plotConfigurationService;
     private final SlotScheduleService slotScheduleService;
     
-    @Scheduled(fixedRateString = "${schedule.in.milliseconds}")
-    public void createScheduleFromLandConfig(){
+    @Scheduled(fixedRateString = "${schedule.interval}")
+    public void createScheduleFromPlotConfig(){
         log.info("Running ");
         var landConfigs = plotConfigurationService.getConfigurationSchedules();
         log.info("Number of Schedules "+ landConfigs.size());
