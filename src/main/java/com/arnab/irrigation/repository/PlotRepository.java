@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author Arnab Bhattacharyya
  */
 @Repository
-public interface PlotRepository extends MongoRepository<Plot, Long> {
+public interface PlotRepository extends MongoRepository<Plot, String> {
     Optional<Plot> findByCode(String code);
 
 }

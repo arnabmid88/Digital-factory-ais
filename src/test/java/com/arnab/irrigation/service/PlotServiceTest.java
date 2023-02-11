@@ -34,10 +34,7 @@ public class PlotServiceTest {
     
     @Mock
     private PlotRepository repository;
-    
-//    @Mock
-//    private IotDeviceRepository iotDeviceRepository;
-    
+
     @Mock
     private PlotConfigurationService  PlotConfigurationService;
     
@@ -66,7 +63,7 @@ public class PlotServiceTest {
     public void addPlot_codeNotExists_expectReturnNewPlot(){
         
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
-        Long id = (long)3;
+        String id = "3";
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
         when(repository.findByCode(PlotDto.getCode()))
@@ -86,7 +83,7 @@ public class PlotServiceTest {
     public void editPlot_IdNotFound_expectException(){
         
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
-        Long id = (long)3;
+        String id = "3";
         
         when(repository.findById(id))
                 .thenReturn(Optional.empty());
@@ -102,7 +99,7 @@ public class PlotServiceTest {
     public void editPlot_idExists_expectReturnUpdatedPlot(){
         
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
-        Long id = (long)3;
+        String id = "3";
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
         when(repository.findById(id))
@@ -121,7 +118,7 @@ public class PlotServiceTest {
     public void configurePlot_IdNotFound_expectException(){
         
         var configureDto = PlotDataProvider.getDefaultConfigureDTO();
-        Long id = (long)3;
+        String id = "3";
         
         when(repository.findById(id))
                 .thenReturn(Optional.empty());
@@ -137,7 +134,7 @@ public class PlotServiceTest {
     public void configurePlot_idExists_expectReturnPlotConfigure(){
         
         var configureDto = PlotDataProvider.getDefaultConfigureDTO();
-        Long id = (long)3;
+        String id = "3";
         Plot Plot = new Plot();        
         
         when(repository.findById(id))
@@ -155,7 +152,7 @@ public class PlotServiceTest {
      @Test
     public void getPlot_IdNotFound_expectException(){
         
-        Long id = (long)3;
+        String id = "3";
         when(repository.findById(id))
                 .thenReturn(Optional.empty());
        
@@ -169,7 +166,7 @@ public class PlotServiceTest {
     @Test
     public void getPlot_IdExist_expectReturnPlot(){
         
-        Long id = (long)3;
+        String id = "3";
         Plot Plot = new Plot();  
         when(repository.findById(id))
                 .thenReturn(Optional.of(Plot));

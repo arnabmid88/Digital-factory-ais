@@ -24,18 +24,18 @@ public interface PlotService {
      * edit an existing land
      *
      * @param model LandDTO must not be {@literal null}.
-     * @param id Integer.
+     * @param id String.
      * @return never {@literal null}.
      */
-    Plot editPlot(PlotDTO model,Long id);
+    Plot editPlot(PlotDTO model,String id);
 
-    Plot configurePlot(ConfigurePlotDTO model,Long id);
+    Plot configurePlot(ConfigurePlotDTO model,String id);
     /**
      * Returns specified category as well as all descendents
      * @param id parent category id
      * @return specified category and descendents
      */
-    Plot getPlotById(Long id);
+    Plot getPlotById(String id);
     List<Plot> getAllPlots();
     
 }

@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/Plot")
+@RequestMapping("/api/v1/plot")
 public class PlotController {
     
     private final PlotService PlotService;
@@ -33,14 +33,14 @@ public class PlotController {
     }
     
     @PutMapping("{PlotId}")
-    public ResponseEntity<Plot> updatePlot(@Valid @RequestBody PlotDTO model,@PathVariable Long PlotId){
+    public ResponseEntity<Plot> updatePlot(@Valid @RequestBody PlotDTO model,@PathVariable String PlotId){
         Plot drone = PlotService.editPlot(model,PlotId);
         return new ResponseEntity<>(drone,HttpStatus.OK); 
     }
     
     
     @PostMapping("{PlotId}/configure")
-    public ResponseEntity<PlotDTO> createPlotConfiguration(@Valid @RequestBody ConfigurePlotDTO model,@PathVariable Long PlotId){
+    public ResponseEntity<PlotDTO> createPlotConfiguration(@Valid @RequestBody ConfigurePlotDTO model,@PathVariable String PlotId){
         Plot Plot = PlotService.configurePlot(model,PlotId);
         var PlotDTO = modelMapper.map(Plot, PlotDTO.class);
         return new ResponseEntity<>(PlotDTO,HttpStatus.OK); 

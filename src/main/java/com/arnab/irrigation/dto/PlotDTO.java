@@ -17,16 +17,13 @@ import java.util.List;
 @Setter
 public class PlotDTO {
     
-    private Long id;
+    private String id;
     
     @Size(max=100,message="Land code is too long")
     private String code;
     
     @NotEmpty
     private String landType;
-    
-    @NotEmpty
-    private String agricType;
     
     @Min(1)
     private float area;

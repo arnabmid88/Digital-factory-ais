@@ -1,20 +1,14 @@
 package com.arnab.irrigation.domain;
 
-import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import java.util.Date;
 
 /**
  *
@@ -29,7 +23,7 @@ public class PlotConfiguration {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     
     @Pattern(regexp="^[A-Za-z0-9-_]*$",message="Invalid name")
     private String deviceName;

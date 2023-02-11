@@ -1,8 +1,11 @@
 # Irrigation System App
 
 
-This is an irrigation scheduling system that automate the scheduling of land irrigation base on timeslot and amount of water configuration 
-
+As a irrigation system which helps the automatic irrigation of agricultural lands without human intervention, system has to
+be designed to fulfil the requirement of maintaining and configuring the plots of land by the irrigation time slots and the
+amount of water required for each irrigation period.
+The irrigation system should have integration interface with a sensor device to direct letting the sensor to irrigate based on
+the configured time slots/amount of water.
 
 
 ## Instructions
@@ -139,15 +142,6 @@ Then irrigation schedule is created and executed by sending a request to Iot dev
 If the service returns NOTAVAILABLE the service is retried until the allowed number of retries is exceed, if the status is still NOTAVAILABE then an  alert is sent to the admin to notify the admin of the service unavailability.  
 
 ```
-## To run integration tests
 
-```
-mvn spring-boot:run
-mvn verify
-```
-
-## Run all the unit test.
+## Run all the test.
 $ mvn test
-
-
-Enjoy!

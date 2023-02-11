@@ -6,17 +6,15 @@ import com.arnab.irrigation.dto.PlotDTO;
 import com.arnab.irrigation.exception.BadRequestException;
 import com.arnab.irrigation.exception.ResourceNotFoundException;
 import com.arnab.irrigation.repository.PlotRepository;
-import com.arnab.irrigation.service.PlotService;
-
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-
+import com.arnab.irrigation.service.PlotConfigurationService;
 import com.arnab.irrigation.service.PlotService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import com.arnab.irrigation.service.PlotConfigurationService;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -47,7 +45,7 @@ public class PlotServiceImpl implements PlotService {
     }
 
     @Override
-    public Plot editPlot(PlotDTO model, Long id) {
+    public Plot editPlot(PlotDTO model, String id) {
         Optional<Plot> Plot = repository.findById(id);
         
         if(!Plot.isPresent()){
@@ -63,7 +61,7 @@ public class PlotServiceImpl implements PlotService {
     }
 
     @Override
-    public Plot configurePlot(ConfigurePlotDTO model,Long id) {
+    public Plot configurePlot(ConfigurePlotDTO model,String id) {
         Optional<Plot> Plot = repository.findById(id);
         
         if(Plot.isEmpty()){
@@ -75,7 +73,7 @@ public class PlotServiceImpl implements PlotService {
     }
 
     @Override
-    public Plot getPlotById(Long id) {
+    public Plot getPlotById(String id) {
         Optional<Plot> Plot = repository.findById(id);    
         if(Plot.isEmpty()){
             throw new ResourceNotFoundException("Plot not found");

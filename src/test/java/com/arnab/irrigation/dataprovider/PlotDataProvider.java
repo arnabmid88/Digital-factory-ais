@@ -7,10 +7,9 @@ package com.arnab.irrigation.dataprovider;
 import com.arnab.irrigation.domain.Plot;
 import com.arnab.irrigation.dto.ConfigurePlotDTO;
 import com.arnab.irrigation.dto.PlotDTO;
-import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -20,13 +19,10 @@ public class PlotDataProvider {
     
     public static final String Plot_CODE = "2722782392889";
     public static final float Plot_AREA = 23348;
-    public static final String AGRIC_TYPE = "Rice Farming";
-
-    public static final PlotDTO getPlotDTO(String code,String PlotType,String agricType, float area){
+    public static final PlotDTO getPlotDTO(String code,String PlotType, float area){
         
         PlotDTO Plot = new PlotDTO();
         Plot.setCode(code);
-        Plot.setAgricType(agricType);
         Plot.setArea(area);
         return Plot;
     }
@@ -35,7 +31,6 @@ public class PlotDataProvider {
         
         PlotDTO Plot = new PlotDTO();
         Plot.setCode(Plot_CODE);
-        Plot.setAgricType(AGRIC_TYPE);
         Plot.setArea(Plot_AREA);
         return Plot;
     }
@@ -55,7 +50,7 @@ public class PlotDataProvider {
         return configure;
     }
     
-     public static final Plot getPlotFromPlotDTO(PlotDTO dto,Long id){        
+     public static final Plot getPlotFromPlotDTO(PlotDTO dto,String id){
         Plot Plot = new Plot();
         Plot.setCode(dto.getCode());
         Plot.setArea(dto.getArea());

@@ -1,37 +1,30 @@
 package com.arnab.irrigation.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.arnab.irrigation.dataprovider.PlotDataProvider;
 import com.arnab.irrigation.domain.Plot;
 import com.arnab.irrigation.dto.PlotDTO;
 import com.arnab.irrigation.service.PlotService;
-import java.util.ArrayList;
-import java.util.List;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.any;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
 
 
@@ -80,7 +73,7 @@ public class PlotControllerTest {
     @Test
     void editPlot_validRequest_expectOkContent() throws Exception {
         
-        Long id = (long)3;
+        String id = "3";
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
@@ -95,7 +88,7 @@ public class PlotControllerTest {
     
     @Test
     void configurePlot_validRequest_expectOkContent() throws Exception {
-        Long id = (long)4;
+        String id = "4";
         ///PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
         var PlotConfigure = PlotDataProvider.getDefaultConfigureDTO();
                 
