@@ -31,6 +31,11 @@ This system uses MongoDB as the primary database. For MongoDB we have used Mongo
 The mail server configuration needs to be updated to send alert to system admin when irrigation controller service is not available
 ```
 
+## To build
+```
+mvn clean compile
+```
+
 ## To run it in local
 
 ```
@@ -97,7 +102,6 @@ To  get land details navigate to http://localhost:8080/api/v1/land/
         "id": 2,
         "code": "7373282",
         "landType": "Loamy",
-        "agricType": "Rice farming",
         "area": 2000.0,
         "landConfigurations": [
             {
