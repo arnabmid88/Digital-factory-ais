@@ -9,6 +9,8 @@ import com.arnab.irrigation.exception.ResourceNotFoundException;
 import com.arnab.irrigation.repository.PlotRepository;
 import com.arnab.irrigation.service.impl.PlotServiceImpl;
 import java.util.Optional;
+
+import org.bson.types.ObjectId;
 import org.junit.After;
 import org.junit.Before;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -85,14 +87,14 @@ public class PlotServiceTest {
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
         String id = "3";
         
-        when(repository.findById(id))
+        when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.empty());
         
         assertThatThrownBy(()-> this.PlotService.editPlot(PlotDto,id))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessage("Plot not found");
         
-        verify(repository).findById(any());
+        verify(repository).findById((ObjectId) any());
     }
     
     @Test
@@ -102,7 +104,7 @@ public class PlotServiceTest {
         String id = "3";
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
-        when(repository.findById(id))
+        when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.of(Plot));
         
         when(repository.save(any()))
@@ -110,7 +112,7 @@ public class PlotServiceTest {
         
         this.PlotService.editPlot(PlotDto,id);
       
-        verify(repository).findById(any());
+        verify(repository).findById((ObjectId) any());
         verify(repository).save(any());
     }
     
@@ -120,14 +122,14 @@ public class PlotServiceTest {
         var configureDto = PlotDataProvider.getDefaultConfigureDTO();
         String id = "3";
         
-        when(repository.findById(id))
+        when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.empty());
        
         assertThatThrownBy(()-> this.PlotService.configurePlot(configureDto,id))
                 .isInstanceOf(BadRequestException.class)
                 .hasMessage("Plot not found");
         
-        verify(repository).findById(any());
+        verify(repository).findById((ObjectId) any());
     }
     
     @Test
@@ -137,7 +139,7 @@ public class PlotServiceTest {
         String id = "3";
         Plot Plot = new Plot();        
         
-        when(repository.findById(id))
+        when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.of(Plot));
                 
         when(PlotConfigurationService.configurePlot(configureDto,Plot))
@@ -145,7 +147,7 @@ public class PlotServiceTest {
                
         this.PlotService.configurePlot(configureDto,id);
       
-        verify(repository).findById(any());
+        verify(repository).findById((ObjectId) any());
         verify(PlotConfigurationService).configurePlot(any(),any());
     }
     
@@ -153,14 +155,14 @@ public class PlotServiceTest {
     public void getPlot_IdNotFound_expectException(){
         
         String id = "3";
-        when(repository.findById(id))
+        when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.empty());
        
         assertThatThrownBy(()-> this.PlotService.getPlotById(id))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Plot not found");
         
-        verify(repository).findById(any());
+        verify(repository).findById((ObjectId) any());
     }
     
     @Test
@@ -168,11 +170,11 @@ public class PlotServiceTest {
         
         String id = "3";
         Plot Plot = new Plot();  
-        when(repository.findById(id))
+        when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.of(Plot));
        var retPlot = this.PlotService.getPlotById(id);
        assertEquals(Plot,retPlot);
-       verify(repository).findById(any());
+       verify(repository).findById((ObjectId) any());
     }
     
     @Before

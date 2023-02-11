@@ -44,27 +44,27 @@ mvn spring-boot:run
 
 ....and navigate your browser to  http://localhost:8080/
 
-To  add land post request to http://localhost:8080/api/v1/land
+To  add plot post request to http://localhost:8080/api/v1/plot
 
 ```JSON
 {
     "code": "73732823y723899",
     "area": 2000,
-    "landType": "Sandy"
+    "plotType": "Sandy"
 }
 ```
 
-To  edit land put request to http://localhost:8080/api/v1/land/{landId}
+To  edit plot put request to http://localhost:8080/api/v1/plot/{plotId}
 
 ```JSON
 {
-    "code": "29388933",
+    "code": "73732823y723899",
     "area": 2000,
-    "landType": "Clay Soil"
+    "plotType": "Clay Soil"
 }
 ```
 
-To  edit configure land post request to http://localhost:8080/api/v1/land/{landId}/configure
+To  edit configure plot post request to http://localhost:8080/api/v1/plot/{plotId}/configure
 
 ```JSON
 {
@@ -76,15 +76,15 @@ To  edit configure land post request to http://localhost:8080/api/v1/land/{landI
 }
 ```
 
-To  get land details navigate to http://localhost:8080/api/v1/land/
+To  get plot details navigate to http://localhost:8080/api/v1/plot/
 ```JSON
 [
     {
         "id": 1,
         "code": "29388933",
-        "landType": "Clay Soil",
+        "plotType": "Clay Soil",
         "area": 2000.0,
-        "landConfigurations": [
+        "plotConfigurations": [
             {
                 "id": 1,
                 "deviceName": "Sensie123",
@@ -101,9 +101,9 @@ To  get land details navigate to http://localhost:8080/api/v1/land/
     {
         "id": 2,
         "code": "7373282",
-        "landType": "Loamy",
+        "plotType": "Loamy",
         "area": 2000.0,
-        "landConfigurations": [
+        "plotConfigurations": [
             {
                 "id": 2,
                 "deviceName": "Sensie153",
@@ -131,12 +131,14 @@ To  get land details navigate to http://localhost:8080/api/v1/land/
     {
         "id": 3,
         "code": "2722782392889",
-        "landType": "sandy soil",
+        "plotType": "sandy soil",
         "area": 23348.0,
-        "landConfigurations": []
+        "plotConfigurations": []
     }
 ]
-
+```
 
 ## Run all the test.
+```
 $ mvn test
+```

@@ -77,7 +77,7 @@ public class PlotControllerTest {
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
-        mvc.perform(put("/api/v1/Plot/"+Plot.getId())
+        mvc.perform(put("/api/v1/Plot/"+Plot.get_id())
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(PlotDto)))
                 .andExpect(status().isOk())

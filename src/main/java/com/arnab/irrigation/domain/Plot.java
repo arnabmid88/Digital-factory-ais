@@ -6,10 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
@@ -21,18 +22,17 @@ import java.util.List;
 @AllArgsConstructor
 public class Plot {
     @Id
-    @Field("_id")
-    private String id;
+    private ObjectId _id;
     
     private String code;
     
     private float area;
     
-    private String landType;
+    private String plotType;
     
     private Date createdOn;
     private Date modifiedOn;
     
-    @OneToMany(mappedBy="land")
-    private List<PlotConfiguration> landConfigurations;
+    @OneToMany(mappedBy="plot")
+    private List<PlotConfiguration> plotConfigurations;
 }

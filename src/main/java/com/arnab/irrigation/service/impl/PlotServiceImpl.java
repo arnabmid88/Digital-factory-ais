@@ -9,6 +9,7 @@ import com.arnab.irrigation.repository.PlotRepository;
 import com.arnab.irrigation.service.PlotConfigurationService;
 import com.arnab.irrigation.service.PlotService;
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,7 @@ public class PlotServiceImpl implements PlotService {
 
     @Override
     public Plot editPlot(PlotDTO model, String id) {
-        Optional<Plot> Plot = repository.findById(id);
+        Optional<Plot> Plot = repository.findById(new ObjectId(id));
         
         if(!Plot.isPresent()){
             throw new BadRequestException("Plot not found");
@@ -54,7 +55,7 @@ public class PlotServiceImpl implements PlotService {
         Plot entity = Plot.get();
         entity.setCode(model.getCode());
         entity.setArea(model.getArea());
-
+        entity.setPlotType(model.getPlotType());
         entity.setModifiedOn(new Date());
         repository.save(entity);
         return entity;  
@@ -62,7 +63,7 @@ public class PlotServiceImpl implements PlotService {
 
     @Override
     public Plot configurePlot(ConfigurePlotDTO model,String id) {
-        Optional<Plot> Plot = repository.findById(id);
+        Optional<Plot> Plot = repository.findById(new ObjectId(id));
         
         if(Plot.isEmpty()){
             throw new BadRequestException("Plot not found");
@@ -74,7 +75,7 @@ public class PlotServiceImpl implements PlotService {
 
     @Override
     public Plot getPlotById(String id) {
-        Optional<Plot> Plot = repository.findById(id);    
+        Optional<Plot> Plot = repository.findById(new ObjectId(id));
         if(Plot.isEmpty()){
             throw new ResourceNotFoundException("Plot not found");
         }  

@@ -1,14 +1,13 @@
 package com.arnab.irrigation.dto;
 
-import java.util.Date;
-import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import com.arnab.irrigation.domain.Plot;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -31,5 +30,7 @@ public class ConfigurePlotDTO {
     
     @Min(10)
     private Integer amountOfWater;
+
+    private List<Plot> plots;
     
 }

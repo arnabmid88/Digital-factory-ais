@@ -4,10 +4,10 @@
  */
 package com.arnab.irrigation.service;
 
-import com.arnab.irrigation.domain.PlotConfiguration;
 import com.arnab.irrigation.domain.Plot;
+import com.arnab.irrigation.domain.PlotConfiguration;
 import com.arnab.irrigation.dto.ConfigurePlotDTO;
-import com.arnab.irrigation.dto.PlotDTO;
+
 import java.util.List;
 
 /**
@@ -25,6 +25,10 @@ public interface PlotConfigurationService {
     PlotConfiguration configurePlot(ConfigurePlotDTO model,Plot Plot);
     
     List<PlotConfiguration> getConfigurationSchedules();
+
+    List<PlotConfiguration> getAllConfiguration();
+
+    PlotConfiguration getConfigurationById(String id);
     
     PlotConfiguration updateNextTimeSlot(PlotConfiguration configuration);
 }

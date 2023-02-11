@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ import java.util.Date;
 public class SlotSchedule {
     
     @Id
-    private String id;
+    private ObjectId _id;
          
     ///private Date timeSlot;
     

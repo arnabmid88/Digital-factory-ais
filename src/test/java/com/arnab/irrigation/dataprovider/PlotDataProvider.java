@@ -7,6 +7,7 @@ package com.arnab.irrigation.dataprovider;
 import com.arnab.irrigation.domain.Plot;
 import com.arnab.irrigation.dto.ConfigurePlotDTO;
 import com.arnab.irrigation.dto.PlotDTO;
+import org.bson.types.ObjectId;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class PlotDataProvider {
         PlotDTO Plot = new PlotDTO();
         Plot.setCode(code);
         Plot.setArea(area);
+        Plot.setPlotType(PlotType);
         return Plot;
     }
     
@@ -54,7 +56,7 @@ public class PlotDataProvider {
         Plot Plot = new Plot();
         Plot.setCode(dto.getCode());
         Plot.setArea(dto.getArea());
-        Plot.setId(id);
+        Plot.set_id(new ObjectId(id));
         return Plot;
     }
     

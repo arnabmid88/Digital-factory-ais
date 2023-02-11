@@ -9,15 +9,14 @@ import com.arnab.irrigation.domain.Plot;
 import com.arnab.irrigation.dto.ConfigurePlotDTO;
 import com.arnab.irrigation.exception.BadRequestException;
 
-import java.util.Date;
+import java.util.*;
 
 import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import com.arnab.irrigation.service.PlotConfigurationService;
 import com.arnab.irrigation.repository.PlotConfigurationRepository;
-import java.util.Calendar;
 
 /**
  *
@@ -32,9 +31,9 @@ public class PlotConfigurationServiceImpl implements PlotConfigurationService {
     
     
     @Override
-    public PlotConfiguration configurePlot(ConfigurePlotDTO model,Plot Plot) {
+    public PlotConfiguration configurePlot(ConfigurePlotDTO model,Plot plot) {
                 
-        if(Plot==null){
+        if(plot==null){
             throw new BadRequestException("Plot not found");
         } 
         PlotConfiguration device = modelMapper.map(model, PlotConfiguration.class);
@@ -42,8 +41,14 @@ public class PlotConfigurationServiceImpl implements PlotConfigurationService {
         if(model.getTimeSlot().getTime() < new Date().getTime()){   
             throw new BadRequestException("Invalid date, time slot cannot be in the past");   
         }
-        
-        device.setPlot(Plot);
+        if(device.getPlot()!=null){
+            device.getPlot().add(plot);
+        }
+        else{
+            List<Plot> plots = new ArrayList<>();
+            plots.add(plot);
+            device.setPlot(plots);
+        }
         device.setNextTimeSlot(model.getTimeSlot());
         device.setCreatedOn(new Date());
         
@@ -55,6 +60,18 @@ public class PlotConfigurationServiceImpl implements PlotConfigurationService {
     public List<PlotConfiguration> getConfigurationSchedules() {
         
         return repository.findByNextTimeSlotEquals(new Date());
+    }
+
+    @Override
+    public List<PlotConfiguration> getAllConfiguration() {
+
+        return repository.findAll();
+    }
+
+    @Override
+    public PlotConfiguration getConfigurationById(String id) {
+        Optional<PlotConfiguration> document = repository.findById(new ObjectId(id));
+        return document.get();
     }
 
     @Override

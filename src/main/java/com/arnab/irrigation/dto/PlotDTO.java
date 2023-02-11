@@ -23,7 +23,7 @@ public class PlotDTO {
     private String code;
     
     @NotEmpty
-    private String landType;
+    private String plotType;
     
     @Min(1)
     private float area;

@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -22,8 +25,7 @@ import java.util.Date;
 public class PlotConfiguration {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private ObjectId _id;
     
     @Pattern(regexp="^[A-Za-z0-9-_]*$",message="Invalid name")
     private String deviceName;
@@ -40,8 +42,8 @@ public class PlotConfiguration {
     
     private Date createdOn;
     private Date modifiedOn;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Plot plot;
+
+    @DBRef
+    private List<Plot> plot;
     
 }
