@@ -11,7 +11,9 @@ import com.arnab.irrigation.exception.BadRequestException;
 
 import java.util.*;
 
+import com.arnab.irrigation.repository.PlotRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,17 +24,20 @@ import com.arnab.irrigation.repository.PlotConfigurationRepository;
  *
  * @author Arnab Bhattacharyya
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PlotConfigurationServiceImpl implements PlotConfigurationService {
 
     private final PlotConfigurationRepository repository;
+
+    private final PlotRepository plotRepository;
     private final ModelMapper modelMapper;
     
     
     @Override
     public PlotConfiguration configurePlot(ConfigurePlotDTO model,Plot plot) {
-                
+
         if(plot==null){
             throw new BadRequestException("Plot not found");
         } 
@@ -41,19 +46,28 @@ public class PlotConfigurationServiceImpl implements PlotConfigurationService {
         if(model.getTimeSlot().getTime() < new Date().getTime()){   
             throw new BadRequestException("Invalid date, time slot cannot be in the past");   
         }
-        if(device.getPlot()!=null){
-            device.getPlot().add(plot);
-        }
-        else{
-            List<Plot> plots = new ArrayList<>();
-            plots.add(plot);
-            device.setPlot(plots);
-        }
         device.setNextTimeSlot(model.getTimeSlot());
         device.setCreatedOn(new Date());
         
-        repository.save(device);   
-        return device;  
+        PlotConfiguration configuration = repository.save(device);
+        Optional<Plot> entityRef = plotRepository.findByCode(plot.getCode());
+        if(entityRef.isPresent()){
+            Plot entity = entityRef.get();
+
+            if(entity.getPlotConfigurations()!=null)
+                entity.getPlotConfigurations().add(configuration);
+            else {
+                List<PlotConfiguration> plotConfigurations = new ArrayList<>();
+                plotConfigurations.add(configuration);
+                entity.setPlotConfigurations(plotConfigurations);
+            }
+
+            plotRepository.save(entity);
+            return device;
+        }else{
+            return null;
+        }
+
     }
 
     @Override

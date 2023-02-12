@@ -65,7 +65,7 @@ public class PlotServiceTest {
     public void addPlot_codeNotExists_expectReturnNewPlot(){
         
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
-        String id = "3";
+        String id = new ObjectId().toHexString();
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
         when(repository.findByCode(PlotDto.getCode()))
@@ -85,7 +85,7 @@ public class PlotServiceTest {
     public void editPlot_IdNotFound_expectException(){
         
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
-        String id = "3";
+        String id = new ObjectId().toHexString();
         
         when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.empty());
@@ -101,7 +101,7 @@ public class PlotServiceTest {
     public void editPlot_idExists_expectReturnUpdatedPlot(){
         
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
-        String id = "3";
+        String id = "63e7d690793939669357501c";
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
         when(repository.findById(new ObjectId(id)))
@@ -120,7 +120,7 @@ public class PlotServiceTest {
     public void configurePlot_IdNotFound_expectException(){
         
         var configureDto = PlotDataProvider.getDefaultConfigureDTO();
-        String id = "3";
+        String id = new ObjectId().toHexString();
         
         when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.empty());
@@ -136,7 +136,7 @@ public class PlotServiceTest {
     public void configurePlot_idExists_expectReturnPlotConfigure(){
         
         var configureDto = PlotDataProvider.getDefaultConfigureDTO();
-        String id = "3";
+        String id = "63e7d690793939669357501c";
         Plot Plot = new Plot();        
         
         when(repository.findById(new ObjectId(id)))
@@ -154,7 +154,7 @@ public class PlotServiceTest {
      @Test
     public void getPlot_IdNotFound_expectException(){
         
-        String id = "3";
+        String id = "63e87cf989e8c928a7359396";
         when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.empty());
        
@@ -168,7 +168,7 @@ public class PlotServiceTest {
     @Test
     public void getPlot_IdExist_expectReturnPlot(){
         
-        String id = "3";
+        String id = "63e7d690793939669357501c";
         Plot Plot = new Plot();  
         when(repository.findById(new ObjectId(id)))
                 .thenReturn(Optional.of(Plot));

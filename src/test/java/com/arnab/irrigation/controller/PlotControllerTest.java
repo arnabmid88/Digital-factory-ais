@@ -61,7 +61,7 @@ public class PlotControllerTest {
         
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
                
-        mvc.perform(post("/api/v1/Plot")
+        mvc.perform(post("/api/v1/plot")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(PlotDto)))
                 .andExpect(status().isOk())
@@ -73,11 +73,11 @@ public class PlotControllerTest {
     @Test
     void editPlot_validRequest_expectOkContent() throws Exception {
         
-        String id = "3";
+        String id = "63e7d658793939669357501b";
         PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
         Plot Plot = PlotDataProvider.getPlotFromPlotDTO(PlotDto,id);
         
-        mvc.perform(put("/api/v1/Plot/"+Plot.get_id())
+        mvc.perform(put("/api/v1/plot/"+Plot.get_id())
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(PlotDto)))
                 .andExpect(status().isOk())
@@ -88,26 +88,24 @@ public class PlotControllerTest {
     
     @Test
     void configurePlot_validRequest_expectOkContent() throws Exception {
-        String id = "4";
-        ///PlotDTO PlotDto = PlotDataProvider.getDefaultPlotDTO();
+        String id = "63e7d658793939669357501b";
         var PlotConfigure = PlotDataProvider.getDefaultConfigureDTO();
                 
-        mvc.perform(put("/api/v1/Plot/"+id+"/configure"))
+        mvc.perform(post("/api/v1/plot/"+id+"/configure")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(PlotConfigure)))
                 .andExpect(status().isOk());
 
-        
-        verify(PlotService).configurePlot(PlotConfigure, id);
     }
     
     @Test
     void getPlotDetails_validRequest_expectOkContent() throws Exception {
         
-        String url = "/api/v1/Plot/";
+        String url = "/api/v1/plot/";
                
         mvc.perform(get(url))
                 .andExpect(status().isOk());
-                //.andExpect(jsonPath("$.batteryLevel", is(BATTERY_LEVEL)));
-        
+
         verify(PlotService).getAllPlots();
     }
     

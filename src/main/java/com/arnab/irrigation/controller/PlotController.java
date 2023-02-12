@@ -40,10 +40,10 @@ public class PlotController {
     
     
     @PostMapping("{PlotId}/configure")
-    public ResponseEntity<PlotDTO> createPlotConfiguration(@Valid @RequestBody ConfigurePlotDTO model,@PathVariable String PlotId){
-        Plot Plot = PlotService.configurePlot(model,PlotId);
-        var PlotDTO = modelMapper.map(Plot, PlotDTO.class);
-        return new ResponseEntity<>(PlotDTO,HttpStatus.OK); 
+    public ResponseEntity<Plot> createPlotConfiguration(@Valid @RequestBody ConfigurePlotDTO model,@PathVariable String PlotId){
+        Plot plot = PlotService.configurePlot(model,PlotId);
+        var PlotDTO = modelMapper.map(plot, PlotDTO.class);
+        return new ResponseEntity<>(plot,HttpStatus.OK);
     }
     
     @GetMapping("")

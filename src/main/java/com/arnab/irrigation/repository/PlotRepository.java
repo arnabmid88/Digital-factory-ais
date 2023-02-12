@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PlotRepository extends MongoRepository<Plot, ObjectId> {
+    @Query("{ 'code' : ?0 }")
     Optional<Plot> findByCode(String code);
 
     @Query("{ '_id' : ?0 }")

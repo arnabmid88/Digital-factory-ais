@@ -18,8 +18,10 @@ import java.util.Date;
  */
 public class PlotDataProvider {
     
-    public static final String Plot_CODE = "2722782392889";
+    public static String Plot_CODE = "272278";
     public static final float Plot_AREA = 23348;
+
+    public static final String PLOT_TYPE = "Sandy";
     public static final PlotDTO getPlotDTO(String code,String PlotType, float area){
         
         PlotDTO Plot = new PlotDTO();
@@ -32,8 +34,11 @@ public class PlotDataProvider {
     public static final PlotDTO getDefaultPlotDTO(){
         
         PlotDTO Plot = new PlotDTO();
+        Integer code = Integer.parseInt(Plot_CODE);
+        Plot_CODE = String.valueOf(++code);
         Plot.setCode(Plot_CODE);
         Plot.setArea(Plot_AREA);
+        Plot.setPlotType(PLOT_TYPE);
         return Plot;
     }
     
@@ -56,6 +61,7 @@ public class PlotDataProvider {
         Plot Plot = new Plot();
         Plot.setCode(dto.getCode());
         Plot.setArea(dto.getArea());
+        Plot.setPlotType(dto.getPlotType());
         Plot.set_id(new ObjectId(id));
         return Plot;
     }

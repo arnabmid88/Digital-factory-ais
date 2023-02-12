@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 public class PlotDTO {
     
-    private String id;
+    private String _id;
     
     @Size(max=100,message="Land code is too long")
     private String code;
